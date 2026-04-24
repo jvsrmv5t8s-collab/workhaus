@@ -411,7 +411,7 @@ function AIPanelContent() {
       >
         {/* Dismiss */}
         <button
-          onClick={() => { setShowMiniCard(false); setMiniCardDismissed(true); }}
+          onClick={() => { setMiniCardDismissed(true); }}
           className="absolute top-2.5 right-2.5 w-5 h-5 rounded-full flex items-center justify-center text-mute hover:text-ink hover:bg-canvas transition-colors"
           aria-label="Dismiss"
         >
