@@ -15,6 +15,7 @@ function getAuth() {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
+    console.log("[/api/lead] Raw payload:", JSON.stringify(body, null, 2));
 
     // ElevenLabs post-call webhook payload shape
     const conversationId: string =
