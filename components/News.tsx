@@ -30,13 +30,13 @@ const posts = [
 export default function News() {
   return (
     <section id="news" className="py-24 lg:py-32 bg-white">
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
+      <div className="max-w-[1160px] mx-auto px-6 lg:px-10">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14">
           <div>
             <p className="text-[13px] font-semibold text-teal uppercase tracking-[0.14em] mb-4">
               HausNews
             </p>
-            <h2 className="text-[36px] lg:text-[52px] leading-[1.05] tracking-[-0.02em] font-bold text-ink">
+            <h2 className="text-[32px] lg:text-[46px] leading-[1.05] tracking-[-0.02em] font-bold text-ink">
               Stories from the Haus.
             </h2>
           </div>

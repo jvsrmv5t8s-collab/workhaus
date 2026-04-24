@@ -19,7 +19,7 @@ export default function Home() {
         <Solutions />
         <Locations />
         <section className="py-24 lg:py-32 bg-canvas">
-          <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
+          <div className="max-w-[1160px] mx-auto px-6 lg:px-10">
             <LocationFinder />
           </div>
         </section>

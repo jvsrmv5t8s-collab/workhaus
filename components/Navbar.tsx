@@ -43,7 +43,7 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 pt-5">
       {/* Desktop */}
-      <div className="hidden md:grid grid-cols-[auto_1fr_auto] items-center max-w-[1280px] mx-auto px-6 lg:px-10 gap-8">
+      <div className="hidden md:grid grid-cols-[auto_1fr_auto] items-center max-w-[1160px] mx-auto px-6 lg:px-10 gap-8">
         {/* Logo */}
         <a href="/">
           <Image
@@ -62,7 +62,7 @@ export default function Navbar() {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className={`px-5 py-2 rounded-full text-[15px] font-medium transition-colors ${linkColor}`}
+                  className={`px-4 py-1.5 rounded-full text-[13px] font-medium transition-colors ${linkColor}`}
                 >
                   {link.label}
                 </a>
@@ -74,7 +74,7 @@ export default function Navbar() {
         {/* CTA */}
         <a
           href="/tour"
-          className={`inline-flex items-center px-6 py-2.5 rounded-full text-[15px] font-semibold transition-colors ${ctaBg}`}
+          className={`inline-flex items-center px-5 py-2 rounded-full text-[13px] font-semibold transition-colors ${ctaBg}`}
         >
           Book a Tour
         </a>

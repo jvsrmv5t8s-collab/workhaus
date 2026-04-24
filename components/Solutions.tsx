@@ -56,7 +56,7 @@ const cards = [
 export default function Solutions() {
   return (
     <section id="solutions" className="bg-canvas py-24 lg:py-32">
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
+      <div className="max-w-[1160px] mx-auto px-6 lg:px-10">
         <div className="grid lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-24 items-start">
 
           {/* Left — sticky */}
@@ -65,7 +65,7 @@ export default function Solutions() {
               <p className="text-[13px] font-semibold text-teal uppercase tracking-[0.14em]">
                 Solutions
               </p>
-              <h2 className="text-[32px] sm:text-[40px] lg:text-[52px] leading-[1.05] tracking-[-0.025em] font-bold text-ink">
+              <h2 className="text-[30px] sm:text-[36px] lg:text-[46px] leading-[1.05] tracking-[-0.025em] font-bold text-ink">
                 Find your space,
                 <br />
                 your way.

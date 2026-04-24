@@ -36,9 +36,9 @@ const amenities = [
 export default function Amenities() {
   return (
     <section className="py-24 lg:py-32 bg-white">
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
+      <div className="max-w-[1160px] mx-auto px-6 lg:px-10">
         {/* Centred headline */}
-        <p className="text-center text-[26px] sm:text-[34px] lg:text-[40px] leading-[1.15] tracking-[-0.025em] font-bold text-ink max-w-[860px] mx-auto">
+        <p className="text-center text-[24px] sm:text-[30px] lg:text-[36px] leading-[1.15] tracking-[-0.025em] font-bold text-ink max-w-[860px] mx-auto">
           Work solo, meet others, or build your team — all in one flexible
           space. Our coworking spaces are designed for comfort, community, and
           deep focus.

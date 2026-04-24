@@ -19,14 +19,14 @@ const pillars = [
 export default function WhyUs() {
   return (
     <section id="why-us" className="py-24 lg:py-32 bg-ink text-white">
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
+      <div className="max-w-[1160px] mx-auto px-6 lg:px-10">
         <div className="grid lg:grid-cols-[1fr_1.3fr] gap-16 lg:gap-24 items-start">
           {/* Left */}
           <div className="lg:sticky lg:top-28">
             <p className="text-[13px] font-semibold text-yellow uppercase tracking-[0.14em] mb-4">
               Why Workhaus
             </p>
-            <h2 className="text-[36px] lg:text-[52px] leading-[1.05] tracking-[-0.02em] font-bold">
+            <h2 className="text-[32px] lg:text-[46px] leading-[1.05] tracking-[-0.02em] font-bold">
               Culture.
               <br />
               Community.
@@ -58,7 +58,7 @@ export default function WhyUs() {
                   <span className="text-[13px] font-mono text-white/30">
                     0{i + 1}
                   </span>
-                  <h3 className="text-[26px] lg:text-[32px] font-semibold tracking-tight">
+                  <h3 className="text-[24px] lg:text-[28px] font-semibold tracking-tight">
                     {p.title}
                   </h3>
                 </div>

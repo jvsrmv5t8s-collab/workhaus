@@ -214,7 +214,7 @@ export default function LocationFinder() {
         <p className="text-[13px] font-semibold text-teal uppercase tracking-[0.14em] mb-2">
           Toronto · 10 Locations
         </p>
-        <h3 className="text-[26px] lg:text-[32px] font-bold text-ink tracking-tight leading-tight">
+        <h3 className="text-[24px] lg:text-[28px] font-bold text-ink tracking-tight leading-tight">
           Find a Workhaus near you
         </h3>
         <p className="mt-3 text-[15px] leading-[1.6] text-ink-soft max-w-lg">

@@ -120,15 +120,15 @@ export default function Hero() {
 
       {/* Main content — vertically centered in the viewport */}
       <div className="relative flex-1 flex items-center w-full">
-        <div className="w-full max-w-[1280px] mx-auto px-6 lg:px-10">
+        <div className="w-full max-w-[1160px] mx-auto px-6 lg:px-10">
           <div className="max-w-[600px] flex flex-col gap-7">
-            <h1 className="text-[40px] sm:text-[58px] lg:text-[84px] leading-[1.0] tracking-[-0.03em] font-bold text-white">
+            <h1 className="text-[36px] sm:text-[52px] lg:text-[76px] leading-[1.0] tracking-[-0.03em] font-bold text-white">
               Coworking,
               <br />
               your way.
             </h1>
 
-            <p className="text-[17px] leading-[1.55] text-white max-w-md">
+            <p className="text-[16px] leading-[1.55] text-white max-w-md">
               Flexible office spaces designed to help you work productively,
               collaborate effectively, and achieve more. Proudly Canadian-owned
               and operated.
@@ -157,7 +157,7 @@ export default function Hero() {
 
       {/* Trusted bar + carousel — pinned to bottom */}
       <div className="relative z-10 border-t border-white/10 bg-black/30 backdrop-blur-sm py-5">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
+        <div className="max-w-[1160px] mx-auto px-6 lg:px-10">
           <div className="flex items-center gap-6 lg:gap-10">
             <p className="shrink-0 text-[12px] font-medium text-white/50 uppercase tracking-[0.12em] whitespace-nowrap">
               Trusted by

@@ -9,11 +9,11 @@ const locations = [
 export default function Locations() {
   return (
     <section id="locations" className="py-24 lg:py-32 bg-white">
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
+      <div className="max-w-[1160px] mx-auto px-6 lg:px-10">
         {/* Header row */}
         <div className="flex items-start justify-between gap-8 mb-10">
           <div className="max-w-lg">
-            <h2 className="text-[32px] sm:text-[40px] lg:text-[52px] leading-[1.05] tracking-[-0.025em] font-bold text-ink">
+            <h2 className="text-[30px] sm:text-[36px] lg:text-[46px] leading-[1.05] tracking-[-0.025em] font-bold text-ink">
               12 locations across Canada
             </h2>
             <p className="mt-4 text-[16px] leading-[1.6] text-ink-soft">

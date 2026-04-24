@@ -6,7 +6,7 @@ import { X, Phone, PhoneOff, Send, Mic, MicOff } from "lucide-react";
 import { ConversationProvider, useConversation } from "@elevenlabs/react";
 
 const AGENT_ID = "agent_1701kpvf86mpfygb170nb8m642xt";
-const CONTAINER_MAX = 1280;
+const CONTAINER_MAX = 1160;
 const FLOATING_RIGHT = 24;
 
 

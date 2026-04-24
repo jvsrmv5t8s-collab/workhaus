@@ -143,8 +143,8 @@ export default function Testimonials() {
   return (
     <section id="testimonials" className="py-24 lg:py-32 bg-white overflow-hidden">
       {/* Header */}
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-10 text-center mb-14">
-        <h2 className="text-[40px] lg:text-[52px] leading-[1.05] tracking-[-0.025em] font-bold text-ink">
+      <div className="max-w-[1160px] mx-auto px-6 lg:px-10 text-center mb-14">
+        <h2 className="text-[36px] lg:text-[46px] leading-[1.05] tracking-[-0.025em] font-bold text-ink">
           What our members say
         </h2>
         <p className="mt-4 text-[16px] leading-[1.6] text-ink-soft max-w-md mx-auto">

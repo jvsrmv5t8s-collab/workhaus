@@ -25,7 +25,7 @@ const avatars = [
 export default function Contact() {
   return (
     <section id="contact" className="py-16 lg:py-24 bg-canvas">
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
+      <div className="max-w-[1160px] mx-auto px-6 lg:px-10">
         <div
           className="rounded-3xl px-6 lg:px-16 py-10 lg:py-16 grid lg:grid-cols-2 gap-8 lg:gap-20 items-center"
           style={{ backgroundColor: "#000000" }}
@@ -33,7 +33,7 @@ export default function Contact() {
           {/* Left */}
           <div className="flex flex-col gap-8">
             <div className="flex flex-col gap-4">
-              <h2 className="text-[32px] sm:text-[40px] lg:text-[52px] leading-[1.05] tracking-[-0.025em] font-bold text-white">
+              <h2 className="text-[30px] sm:text-[36px] lg:text-[46px] leading-[1.05] tracking-[-0.025em] font-bold text-white">
                 Ready to increase
                 <br />
                 your productivity?
