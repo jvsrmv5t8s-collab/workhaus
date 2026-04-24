@@ -21,10 +21,25 @@ type LeadInfo = {
   name: string | null;
   email: string | null;
   phone: string | null;
+  city: string | null;
+  workspace_type: string | null;
+  team_size: string | null;
+};
+
+// Only these fields get visible confirmation cards — the rest are captured silently
+const VISIBLE_FIELDS: (keyof LeadInfo)[] = ["name", "email", "phone"];
+
+const EMPTY_LEAD: LeadInfo = {
+  name: null,
+  email: null,
+  phone: null,
+  city: null,
+  workspace_type: null,
+  team_size: null,
 };
 
 function AIPanelContent() {
-  const [leadInfo, setLeadInfo] = useState<LeadInfo>({ name: null, email: null, phone: null });
+  const [leadInfo, setLeadInfo] = useState<LeadInfo>(EMPTY_LEAD);
   const [activeInputField, setActiveInputField] = useState<keyof LeadInfo | null>(null);
 
   const {
@@ -38,11 +53,11 @@ function AIPanelContent() {
     clientTools: {
       capture_lead_info: ({ field, value }: { field: keyof LeadInfo; value: string }) => {
         setLeadInfo(prev => ({ ...prev, [field]: value }));
-        setActiveInputField(null);
+        if (VISIBLE_FIELDS.includes(field)) setActiveInputField(null);
         return "Captured successfully";
       },
       request_input: ({ field }: { field: keyof LeadInfo }) => {
-        setActiveInputField(field);
+        if (VISIBLE_FIELDS.includes(field)) setActiveInputField(field);
         return "Input field shown";
       },
     },
@@ -109,7 +124,7 @@ function AIPanelContent() {
       setNetworkError(false);
       setConversationStarted(false);
       setMicError(false);
-      setLeadInfo({ name: null, email: null, phone: null });
+      setLeadInfo(EMPTY_LEAD);
       setActiveInputField(null);
     } else {
       setHangUpLock(false);
@@ -299,9 +314,9 @@ function AIPanelContent() {
           )}
 
           {/* Captured lead info cards */}
-          {conversationStarted && (leadInfo.name || leadInfo.email || leadInfo.phone) && (
+          {conversationStarted && VISIBLE_FIELDS.some(f => leadInfo[f]) && (
             <div className="w-full flex flex-col gap-1.5 mt-1">
-              {(["name", "email", "phone"] as (keyof LeadInfo)[])
+              {VISIBLE_FIELDS
                 .filter(field => leadInfo[field])
                 .map(field => (
                   <div
