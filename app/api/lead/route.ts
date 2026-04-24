@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
     const toolCalls: { tool_name: string; parameters: Record<string, string> }[] =
       body?.data?.client_tool_calls ?? [];
 
-    // Extract fields captured via capture_lead_info tool calls
+    // Extract all fields captured via capture_lead_info tool calls
     const captured: Record<string, string> = {};
     for (const call of toolCalls) {
       if (call.tool_name === "capture_lead_info" && call.parameters?.field) {
@@ -39,16 +39,22 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // Columns A–N
     const row = [
-      new Date().toLocaleString("en-CA", { timeZone: "America/Toronto" }),
-      captured.name ?? "",
-      captured.email ?? "",
-      captured.phone ?? "",
-      captured.city ?? "",
-      captured.workspace_type ?? "",
-      captured.team_size ?? "",
-      durationSecs ? `${Math.round(durationSecs)}s` : "",
-      conversationId,
+      new Date().toLocaleString("en-CA", { timeZone: "America/Toronto" }), // A: Timestamp
+      captured.name ?? "",                                                   // B: Name
+      captured.email ?? "",                                                  // C: Email
+      captured.phone ?? "",                                                  // D: Phone
+      captured.city ?? "",                                                   // E: City
+      captured.workspace_type ?? "",                                         // F: Workspace Type
+      captured.team_size ?? "",                                              // G: Team Size
+      captured.physical_requirements ?? "",                                  // H: Physical Requirements
+      captured.technical_requirements ?? "",                                 // I: Technical Requirements
+      captured.outcome ?? "",                                                // J: Outcome
+      "Hazel / Conversational AI",                                           // K: Source
+      durationSecs ? `${Math.round(durationSecs)}s` : "",                   // L: Duration
+      conversationId,                                                        // M: Conversation ID
+      "",                                                                    // N: Follow-Up Status (manual)
     ];
 
     const auth = getAuth();
@@ -56,7 +62,7 @@ export async function POST(req: NextRequest) {
 
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEET_ID!,
-      range: "Sheet1!A:I",
+      range: "Sheet1!A:N",
       valueInputOption: "USER_ENTERED",
       requestBody: { values: [row] },
     });

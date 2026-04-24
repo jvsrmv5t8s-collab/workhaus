@@ -24,6 +24,9 @@ type LeadInfo = {
   city: string | null;
   workspace_type: string | null;
   team_size: string | null;
+  physical_requirements: string | null;
+  technical_requirements: string | null;
+  outcome: string | null;
 };
 
 // Only these fields get visible confirmation cards — the rest are captured silently
@@ -36,6 +39,9 @@ const EMPTY_LEAD: LeadInfo = {
   city: null,
   workspace_type: null,
   team_size: null,
+  physical_requirements: null,
+  technical_requirements: null,
+  outcome: null,
 };
 
 function AIPanelContent() {
