@@ -15,30 +15,33 @@ function getAuth() {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    console.log("[/api/lead] Raw payload:", JSON.stringify(body, null, 2));
 
-    // ElevenLabs post-call webhook payload shape
-    const conversationId: string =
-      body?.data?.conversation_id ??
-      body?.conversation_id ??
-      "";
+    const data = body?.data ?? {};
 
-    const durationSecs: number =
-      body?.data?.metadata?.call_duration_secs ??
-      body?.data?.call_duration_secs ??
-      0;
+    const conversationId: string = data.conversation_id ?? "";
+    const durationSecs: number = data.metadata?.call_duration_secs ?? 0;
 
-    // client_tool_calls is an array of { tool_name, parameters } objects
-    const toolCalls: { tool_name: string; parameters: Record<string, string> }[] =
-      body?.data?.client_tool_calls ?? [];
+    // Extract capture_lead_info calls from every agent turn in the transcript
+    const transcript: { role: string; tool_calls?: { tool_name: string; parameters?: Record<string, string> }[] }[] =
+      data.transcript ?? [];
 
-    // Extract all fields captured via capture_lead_info tool calls
     const captured: Record<string, string> = {};
-    for (const call of toolCalls) {
-      if (call.tool_name === "capture_lead_info" && call.parameters?.field) {
-        captured[call.parameters.field] = call.parameters.value ?? "";
+    for (const turn of transcript) {
+      for (const call of turn.tool_calls ?? []) {
+        if (call.tool_name === "capture_lead_info" && call.parameters?.field) {
+          captured[call.parameters.field] = call.parameters.value ?? "";
+        }
       }
     }
+
+    // Fallback: use ElevenLabs' built-in data_collection_results for fields not captured via tool
+    const dcr = data.analysis?.data_collection_results ?? {};
+    if (!captured.name && dcr.lead_name?.value)            captured.name           = dcr.lead_name.value;
+    if (!captured.email && dcr.contact_email?.value)        captured.email          = dcr.contact_email.value;
+    if (!captured.phone && dcr.contact_phone?.value)        captured.phone          = dcr.contact_phone.value;
+    if (!captured.city && dcr.desired_location?.value)      captured.city           = dcr.desired_location.value;
+    if (!captured.workspace_type && dcr.space_type_interest?.value) captured.workspace_type = dcr.space_type_interest.value;
+    if (!captured.team_size && dcr.team_size?.value)        captured.team_size      = String(dcr.team_size.value);
 
     // Columns A–N
     const row = [
