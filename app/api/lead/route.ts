@@ -20,6 +20,7 @@ export async function POST(req: NextRequest) {
 
     const conversationId: string = data.conversation_id ?? "";
     const durationSecs: number = data.metadata?.call_duration_secs ?? 0;
+    const summary: string = data.analysis?.transcript_summary ?? "";
 
     // Extract capture_lead_info calls from every agent turn in the transcript
     const transcript: { role: string; tool_calls?: { tool_name: string; parameters?: Record<string, string> }[] }[] =
@@ -34,16 +35,22 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Fallback: use ElevenLabs' built-in data_collection_results for fields not captured via tool
-    const dcr = data.analysis?.data_collection_results ?? {};
-    if (!captured.name && dcr.lead_name?.value)            captured.name           = dcr.lead_name.value;
-    if (!captured.email && dcr.contact_email?.value)        captured.email          = dcr.contact_email.value;
-    if (!captured.phone && dcr.contact_phone?.value)        captured.phone          = dcr.contact_phone.value;
-    if (!captured.city && dcr.desired_location?.value)      captured.city           = dcr.desired_location.value;
-    if (!captured.workspace_type && dcr.space_type_interest?.value) captured.workspace_type = dcr.space_type_interest.value;
-    if (!captured.team_size && dcr.team_size?.value)        captured.team_size      = String(dcr.team_size.value);
+    // Only use ElevenLabs' built-in data_collection_results as fallback for
+    // qualified or browsing leads — not for disqualified day-pass calls where
+    // the enum would incorrectly map "on-demand" to "Private Offices".
+    const isDisqualified = captured.outcome === "disqualified_day_pass";
 
-    // Columns A–N
+    if (!isDisqualified) {
+      const dcr = data.analysis?.data_collection_results ?? {};
+      if (!captured.name && dcr.lead_name?.value)                     captured.name           = dcr.lead_name.value;
+      if (!captured.email && dcr.contact_email?.value)                 captured.email          = dcr.contact_email.value;
+      if (!captured.phone && dcr.contact_phone?.value)                 captured.phone          = dcr.contact_phone.value;
+      if (!captured.city && dcr.desired_location?.value)               captured.city           = dcr.desired_location.value;
+      if (!captured.workspace_type && dcr.space_type_interest?.value)  captured.workspace_type = dcr.space_type_interest.value;
+      if (!captured.team_size && dcr.team_size?.value)                 captured.team_size      = String(dcr.team_size.value);
+    }
+
+    // Columns A–O
     const row = [
       new Date().toLocaleString("en-CA", { timeZone: "America/Toronto" }), // A: Timestamp
       captured.name ?? "",                                                   // B: Name
@@ -59,6 +66,7 @@ export async function POST(req: NextRequest) {
       durationSecs ? `${Math.round(durationSecs)}s` : "",                   // L: Duration
       conversationId,                                                        // M: Conversation ID
       "",                                                                    // N: Follow-Up Status (manual)
+      summary,                                                               // O: AI Summary
     ];
 
     const auth = getAuth();
@@ -66,7 +74,7 @@ export async function POST(req: NextRequest) {
 
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEET_ID!,
-      range: "Sheet1!A:N",
+      range: "Sheet1!A:O",
       valueInputOption: "USER_ENTERED",
       requestBody: { values: [row] },
     });
