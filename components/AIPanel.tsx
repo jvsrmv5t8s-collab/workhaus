@@ -329,7 +329,7 @@ function AIPanelContent() {
                 <span className="w-1.5 h-1.5 rounded-full bg-teal/60 animate-bounce [animation-delay:150ms]" />
                 <span className="w-1.5 h-1.5 rounded-full bg-teal/60 animate-bounce [animation-delay:300ms]" />
               </div>
-              <p className="text-[11px] text-mute tracking-wide">Hazel is thinking…</p>
+              <p className="text-[11px] text-mute tracking-wide">Listening…</p>
             </div>
           )}
 
