@@ -179,9 +179,11 @@ function AIPanelContent() {
     networkError ? "Connection failed — check your internet" :
     micError ? "Microphone access denied" :
     connecting ? "Connecting..." :
-    orbState === "listening" ? "Listening..." :
     orbState === "speaking" ? "Responding..." :
     null;
+
+  // True when Hazel is connected but silent — either listening or processing
+  const isThinking = connected && !isSpeaking && conversationStarted;
 
   // Style tokens
   const panelBg = heroMode
@@ -317,6 +319,18 @@ function AIPanelContent() {
             }`}>
               {statusLabel}
             </p>
+          )}
+
+          {/* Thinking indicator — when Hazel is silent during an active call */}
+          {isThinking && !statusLabel && !activeInputField && (
+            <div className="flex flex-col items-center gap-1.5">
+              <div className="flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-teal/60 animate-bounce [animation-delay:0ms]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-teal/60 animate-bounce [animation-delay:150ms]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-teal/60 animate-bounce [animation-delay:300ms]" />
+              </div>
+              <p className="text-[11px] text-mute tracking-wide">Hazel is thinking…</p>
+            </div>
           )}
 
           {/* Captured lead info cards */}
