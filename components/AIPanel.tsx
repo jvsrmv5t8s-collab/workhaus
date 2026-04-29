@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { X, Phone, PhoneOff, Send, Mic, MicOff } from "lucide-react";
 import { ConversationProvider, useConversation } from "@elevenlabs/react";
 
@@ -45,6 +46,7 @@ const EMPTY_LEAD: LeadInfo = {
 };
 
 function AIPanelContent() {
+  const router = useRouter();
   const [leadInfo, setLeadInfo] = useState<LeadInfo>(EMPTY_LEAD);
   const [activeInputField, setActiveInputField] = useState<keyof LeadInfo | null>(null);
 
@@ -65,6 +67,10 @@ function AIPanelContent() {
       request_input: ({ field }: { field: keyof LeadInfo }) => {
         if (VISIBLE_FIELDS.includes(field)) setActiveInputField(field);
         return "Input field shown";
+      },
+      navigate_to_tour: () => {
+        router.push("/tour");
+        return "Navigating to Book a Tour page";
       },
     },
   });
